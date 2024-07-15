@@ -6,6 +6,9 @@ class Person:
         self.first_name = first_name
         self.last_name = last_name
 
+    def __str__(self) -> str:
+        return f'{self.id} {self.first_name} {self.last_name}'
+
 class Account:
     def __init__(self, number: int, type_of_account: str, owner: Person, balance: float = 0.0):
         self.number = number
@@ -25,6 +28,12 @@ class Bank:
             #^^ raise an exception if the person is already in the customer list
         self.customers[person.id] = person  #person added to the self.customers dictionary
                 #id is the key, person is the value
+
+    def print_customers(self):
+        print("Our Customers:")
+        for _, value in self.customers.items():
+            print(value)
+
     def add_account(self, account: Account):
         if account.owner.id not in self.customers:
             raise ValueError("The account owner must be registered as a customer first.")
